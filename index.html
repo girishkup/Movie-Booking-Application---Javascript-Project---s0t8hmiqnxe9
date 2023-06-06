@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Booking App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="App.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href="#">Movie Booking App</a>
+      </div>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Search" />
+        <button id="search-btn">Search</button>
+      </div>
+    </nav>
 
+    <div class="container">
+      <div class="genre-list">
+        <h2>Genres</h2>
+        <ul id="genreList"></ul>
+      </div>
+      <div class="movies">
+        <h2>Now Playing</h2>
+        <div id="movieList"></div>
+      </div>
+    </div>
+
+    <div id="popup" class="popup">
+      <div id="popupContent" class="popup-content"></div>
+      <button id="closePopup" class="close-btn">X</button>
+      <div id="checkoutContent" class="checkout-content"></div>
+    </div>
+  </body>
+</html>
