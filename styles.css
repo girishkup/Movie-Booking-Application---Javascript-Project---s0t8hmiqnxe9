@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   margin: 0;
   padding: 0;
   max-width: 100%;
@@ -23,9 +23,10 @@ nav {
 
 .logo a {
   color: #000000;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: large;
   text-decoration: none;
-  margin-left: 225px;
+  margin-left: 365px;
 }
 
 .search {
@@ -34,7 +35,7 @@ nav {
 input,
 button {
   padding: 8px;
-  color: blue;
+  color: rgb(33, 33, 151);
 }
 input {
   border: 1px solid grey;
@@ -51,14 +52,16 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   justify-content: space-between;
-  margin: 20px;
+  /* align-items: flex-start; */
+  margin: 20px auto;
   border-top: 3px solid rgb(37, 37, 37);
 }
 
 .genre-list {
   flex: 0 0 10%;
-  border-top: 1px solid black;
+  /* border-top: 1px solid black; */
   border-right: 1px solid black;
+  padding: 20px;
 }
 
 .genre-list h2 {
@@ -79,7 +82,7 @@ button {
 .movies {
   flex: 0 0 90%;
   padding: 20px;
-  margin-left: 40px;
+  margin-left: 30px;
 }
 
 .movies h2 {
@@ -91,10 +94,10 @@ button {
   /* display: grid; */
   /* grid-template-columns: repeat(4, 1fr); */
   justify-content: space-evenly;
-  /* width: 300px; */
+  align-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   border: 1px solid #262626;
   border-radius: 5px;
   padding: 10px;
@@ -103,41 +106,18 @@ button {
 }
 
 .movie-card img {
-  /* width: 100px; */
-  height: 250px;
+  height: 350px;
   object-fit: cover;
-  margin-right: 10px;
+  /* margin: 10px; */
+  border-radius: 5px;
+  align-self: flex-start;
 }
 div.movie-card div {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
-  /* flex-grow: inherit; */
-  /* justify-content: space-between; */
-  /* background-color: red; */
 }
-
-/* .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .popup-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        max-width: 600px;
-        width: 100%;
-      } */
 
 .popup {
   display: none;

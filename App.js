@@ -1,8 +1,8 @@
 const apiKey = 'ade48d0d534f4a192c19d6c06d954956';
 const baseUrl = 'https://api.themoviedb.org/3';
 const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`;
-const genresUrl = `${baseUrl}/genre/movie/list?api_key=${apiKey}`;
-const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=`;
+const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
 
 const genreListElement = document.getElementById('genreList');
 const movieListElement = document.getElementById('movieList');
@@ -15,7 +15,7 @@ const closePopupButton = document.getElementById('closePopup');
 // Fetch genres and display them in the genre list
 function fetchGenres() {
   fetch(genresUrl)
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then((data) => {
       data.genres.forEach((genre) => {
         const li = document.createElement('li');
@@ -73,19 +73,6 @@ function filterMoviesByGenre(genreId) {
     .catch((error) => console.log(error));
 }
 
-// Show movie details in a popup
-//   function showMovieDetails(movie) {
-//     popupContent.innerHTML = `
-//     <h2>${movie.title}</h2>
-//     <p>Rating: ${movie.vote_average}</p>
-//     <p>Language: ${movie.original_language}</p>
-//     <p>Duration: ${movie.runtime} min</p>
-//     <p>Overview: ${movie.overview}</p>
-//     <p>Price: $${getRandomPrice()}</p>
-//     <button onclick="openCheckoutPage('${movie.title}', '${getRandomPrice()}')">Book Tickets</button>
-// `;
-//     popup.style.display = 'flex';
-//   }
 function showMovieDetails(movie) {
   popupContent.style.display = '';
   // console.log(movie);
@@ -115,7 +102,7 @@ function showMovieDetails(movie) {
                     </div>
                     <div class="popup-info-item">
                         <span class="popup-info-label">Genre:</span>
-
+                        <span class="popup-info-value">${fetchGenres()} min</span>
                     </div>
                     <div class="popup-info-item">
                         <span class="popup-info-label">Overview:</span>
@@ -129,26 +116,14 @@ function showMovieDetails(movie) {
                 </div>
             </div>
         `;
-
-  // popupContent.innerHTML = popupContentHTML;
   popup.style.display = 'flex';
 }
 
-// Generate a random price between 250 and 300
+//random price between 250 and 300
 function getRandomPrice() {
   return Math.floor(Math.random() * 51) + 250;
 }
 
-// Open the checkout page with movie details
-// function openCheckoutPage(movieTitle, ticketPrice) {
-//   const numberOfTickets = prompt('Enter the number of tickets:');
-//   if (numberOfTickets) {
-//     const convenienceFee = numberOfTickets * ticketPrice * 0.0175;
-//     const subtotal = numberOfTickets * ticketPrice + convenienceFee;
-//     const checkoutSummary = `Movie: ${movieTitle}\nCost of 1 Ticket: $${ticketPrice}\nNumber of Tickets: ${numberOfTickets}\nConvenience Fee: $${convenienceFee.toFixed(2)}\nSubtotal: $${subtotal.toFixed(2)}`;
-//     alert(checkoutSummary);
-//   }
-// }
 const checkoutContent = document.getElementById('checkoutContent');
 function openCheckoutPage(movieTitle, price) {
   checkoutContent.style.display = 'flex';
@@ -157,8 +132,7 @@ function openCheckoutPage(movieTitle, price) {
           <div class="summary-section">
               <h2>Summary</h2>
               <div class="summary-item">
-                  <span class="summary-label">Movie:</span>
-                  <span class="summary-value">${movieTitle}</span>
+                  <h5 class="summary-value">${movieTitle}</h5>
               </div>
               <div class="summary-item">
                   <span class="summary-label">Ticket Price:</span>
@@ -172,6 +146,7 @@ function openCheckoutPage(movieTitle, price) {
                   <span class="summary-label">Convenience Fee(1.75%):   </span>
                   <span class="summary-value" id="convenienceFee">${price * 0.02}</span>
               </div>
+              <hr/>
               <div class="summary-item">
                   <span class="summary-label">Subtotal:</span>
                   <span class="summary-value" id="subtotal">₹${price + price * 0.02}</span>
@@ -203,13 +178,10 @@ function openCheckoutPage(movieTitle, price) {
                         <input type="radio" id="upi" name="for="paymentMethod"" required>
                         <label for="upi">UPI</label>
                   </div>
-                  <button type="submit">Proceed to Payment</button>
+                  <button type="submit">Proceed to Pay</button>
               </form>
           </div>
       `;
-
-  // checkoutContent.innerHTML = checkoutContentHTML;
-  // checkoutPopup.style.display = 'flex';
 }
 
 // Close the movie details popup
