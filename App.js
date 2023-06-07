@@ -128,60 +128,78 @@ const checkoutContent = document.getElementById('checkoutContent');
 function openCheckoutPage(movieTitle, price) {
   checkoutContent.style.display = 'flex';
   popupContent.style.display = 'none';
-  checkoutContent.innerHTML = `
-          <div class="summary-section">
-              <h2>Summary</h2>
-              <div class="summary-item">
-                  <h5 class="summary-value">${movieTitle}</h5>
-              </div>
-              <div class="summary-item">
-                  <span class="summary-label">Ticket Price:</span>
-                  <span class="summary-value">₹${price}</span>
-              </div>
-              <div class="summary-item">
-                  <label for="ticketCount" class="summary-label">Number of Tickets:</label>
-                  <input type="number" id="ticketCount" min="1" value="1">
-              </div>
-              <div class="summary-item">
-                  <span class="summary-label">Convenience Fee(1.75%):   </span>
-                  <span class="summary-value" id="convenienceFee">${price * 0.02}</span>
-              </div>
-              <hr/>
-              <div class="summary-item">
-                  <span class="summary-label">Subtotal:</span>
-                  <span class="summary-value" id="subtotal">₹${price + price * 0.02}</span>
-              </div>
-          </div>
-          <div class="payment-section">
-              <h2>Payment Details</h2>
-              <form id="paymentForm">
-                <div>
-                  <div class="payment-item">
-                      <label for="firstName">First Name:</label>
-                      <input type="text" id="firstName" required>
-                  </div>
-                  <div class="payment-item">
-                      <label for="lastName">Last Name:</label>
-                      <input type="text" id="lastName" required>
-                  </div>
-                  <div class="payment-item">
-                      <label for="email">Email:</label>
-                      <input type="email" id="email" required>
-                      </div>
-                </div>
-                      <div class="payment-item">
-                        <p>Payment Method:</p>
-                        <input type="radio" id="creditcard" name="for="paymentMethod"" required>
-                        <label for="creditcard">Credit Card</label>
-                        <input type="radio" id="creditcard" name="for="paymentMethod"" required>
-                        <label for="debitcard">Debit Card</label>
-                        <input type="radio" id="upi" name="for="paymentMethod"" required>
-                        <label for="upi">UPI</label>
-                  </div>
-                  <button type="submit">Proceed to Pay</button>
-              </form>
-          </div>
-      `;
+  checkoutContent.innerHTML = `<div class="summary-section">
+  <h2>Summary</h2>
+  <div class="summary-item">
+    <h5 class="summary-value">${movieTitle}</h5>
+  </div>
+  <div class="summary-item">
+    <span class="summary-label">Ticket Price:</span>
+    <span class="summary-value">₹${price}</span>
+  </div>
+  <div class="summary-item">
+    <label for="ticketCount" class="summary-label">Number of Tickets:</label>
+    <input type="number" id="ticketCount" min="1" value="1" />
+  </div>
+  <div class="summary-item">
+    <span class="summary-label">Convenience Fee(1.75%): </span>
+    <span class="summary-value" id="convenienceFee">${price * 0.02}</span>
+  </div>
+  <hr />
+  <div class="summary-item">
+    <span class="summary-label">Subtotal:</span>
+    <span class="summary-value" id="subtotal">₹${price + price * 0.02}</span>
+  </div>
+</div>
+<div class="payment-section">
+  <h2>Payment Details</h2>
+  <form id="paymentForm">
+    <div>
+      <div class="payment-item">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required />
+      </div>
+      <div class="payment-item">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required />
+      </div>
+      <div class="payment-item">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="payment-item">
+      <input type="radio" id="creditcard" name="for="paymentMethod"" required>
+      <label for="creditcard">Credit Card</label>
+      <input type="radio" id="creditcard" name="for="paymentMethod"" required>
+      <label for="debitcard">Debit Card</label>
+      <input type="radio" id="upi" name="for="paymentMethod"" required>
+      <label for="upi">UPI</label>
+    </div>
+    <label for="nameOnCard">Name on card</label>
+    <br />
+    <input type="text" id="nameOnCard" required />
+    <p style="color: #555; font-size: 10px">Full name as displayed on card</p>
+    <label for="creditCardNumber">Credit card number</label>
+    <br />
+    <input type="number" id="creditCardNumber" required />
+    <br/>
+    <label for="expiration">Expiration</label>
+    <br />
+    <input type="text" id="expiration" required />
+    <br/>
+    <label for="cvv">CVV</label>
+    <br />
+    <input type="text" id="cvv" required />
+    <br/>
+    <div>
+      <button type="submit">Proceed to Pay</button>
+    </div>
+  </form>
+</div>`;
 }
 
 // Close the movie details popup
