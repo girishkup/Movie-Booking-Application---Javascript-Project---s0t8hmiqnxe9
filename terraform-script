@@ -5,7 +5,7 @@ provider "aws" {
 # 🔑 Generate Key Pair
 resource "aws_key_pair" "app_key" {
   key_name   = "movie_booking_key"
-  public_key = "YOUR_SSH_PUBLIC_KEY_HERE"
+  public_key = "ssh-rsa AAAAxCk/foaWGcDC15lXT0YUrNC1oTQiVanyr9h4rvA7YLth0gzM2KA3F77lmZ0aGh5zpfQVauQhs6QmSwID1Hz7av0yNlmQ8AUWCZWF/m/KkUSB0Tsl+NxF1cWkyfCzCD1Cm7X6pAHwr4V2j2NtZedN3sRS1xsdquCn+Qc3P4nnuSa8ZgqtGxVTf/GI1Fui0CFw3SS1q1CweLe/4qJ998wYHx0hxUt+Xj7gQtNqjL0epJBKm/WOY/9t7Vb9PprKJe5IfrDHpCYpYiI0HgF0idtTU5dCvZga9/o3orfyDM+0+mGzU9C4Kh1KXtvaksdk6p8dsg6dG8lTC5zLAl1dH1wr7VqT1cuPPvMJFY4a4LQ5mWldoEab4HGGKIht5AuXIbopRGllCWs4oqcDZlkLO9WP5sYboQNyrCVlq6+gC4tYVB/62UCbbdy2e85P6paaEzEWojaDhPWT4QH8EcDyUAKU61k9MZq3cG1nCwYMwP1e+eMiNmCfE3LXDQ3GJ5Vr1uL/SRXuL6194MumlkrajY2OJ44D3OBbf+W3ixLoV++5cxFC0gCLGiFdOvvGDZ1iR9dmevXf/bSuEvn7/y/AUxUweUIt6n8Y1UnI0vM5IZCJZ9Lf2V7s3kJIdZQ2HMCo1e8YsYLeB0yHzw== girish.kumar@gmail.com"
 }
 
 # 🚀 Create VPC
@@ -142,10 +142,10 @@ resource "aws_security_group" "bastion_sg" {
 
 # 🖥️ Bastion Host (Public Subnet)
 resource "aws_instance" "bastion_host" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-0f9de6e2d2f067fca"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public_subnet_az1.id
-  security_groups = [aws_security_group.bastion_sg.name]
+  vpc_security_group_ids = [aws_security_group.bastion_sg.id]
   key_name       = aws_key_pair.app_key.key_name
 
   tags = {
@@ -155,10 +155,10 @@ resource "aws_instance" "bastion_host" {
 
 # 🏢 Private Application Servers
 resource "aws_instance" "app_server_az1" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-0f9de6e2d2f067fca"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private_subnet_az1.id
-  security_groups = [aws_security_group.app_sg.name]
+  vpc_security_group_ids = [aws_security_group.app_sg.id]
   key_name       = aws_key_pair.app_key.key_name
 
   tags = {
@@ -167,10 +167,10 @@ resource "aws_instance" "app_server_az1" {
 }
 
 resource "aws_instance" "app_server_az2" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-0f9de6e2d2f067fca"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private_subnet_az2.id
-  security_groups = [aws_security_group.app_sg.name]
+  vpc_security_group_ids = [aws_security_group.app_sg.id]
   key_name       = aws_key_pair.app_key.key_name
 
   tags = {
@@ -179,14 +179,14 @@ resource "aws_instance" "app_server_az2" {
 }
 
 # 📦 S3 Storage
-resource "aws_s3_bucket" "app_bucket" {
-  bucket = "movie-booking-assets"
-}
+#resource "aws_s3_bucket" "app_bucket" {
+#  bucket = "movie-booking-assets"
+#}
 
-resource "aws_s3_bucket_acl" "app_bucket_acl" {
-  bucket = aws_s3_bucket.app_bucket.id
-  acl    = "private"
-}
+#resource "aws_s3_bucket_acl" "app_bucket_acl" {
+#  bucket = aws_s3_bucket.app_bucket.id
+#  acl    = "private"
+#}
 
 # 🎯 Load Balancer + Target Group
 resource "aws_lb" "app_lb" {
@@ -194,7 +194,7 @@ resource "aws_lb" "app_lb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.app_sg.id]
-  subnets           = [aws_subnet.public_subnet_az1.id, aws_subnet.public_subnet_az2.id]
+  subnets            = [aws_subnet.public_subnet_az1.id, aws_subnet.public_subnet_az2.id]
 }
 
 resource "aws_lb_target_group" "app_tg" {
