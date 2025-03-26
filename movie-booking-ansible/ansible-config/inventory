@@ -1,0 +1,9 @@
+[bastion]
+bastion_host ansible_host=18.206.100.84 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/movie_booking_key.pem
+
+[app_servers]
+app_server_az1 ansible_host=10.0.2.229 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/movie_booking_key.pem
+app_server_az2 ansible_host=10.0.4.189 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/movie_booking_key.pem
+
+[demo]
+demo_terraform_ec2 ansible_host=18.212.1.170 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/movie_booking_key.pem
